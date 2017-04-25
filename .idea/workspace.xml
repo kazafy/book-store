@@ -2,25 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0520d856-7456-446d-a137-a296e35cf5ca" name="Default" comment="">
-<<<<<<< HEAD
-<<<<<<< HEAD
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/store/templates/author.html" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/store/templates/authors.html" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/store/templates/book.html" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/store/templates/books.html" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/store/urls.py" />
-=======
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/thebook.iml" afterPath="$PROJECT_DIR$/.idea/thebook.iml" />
->>>>>>> 0a7c7689a4c9f2c708b21087a009175a440d5792
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/store/admin.py" afterPath="$PROJECT_DIR$/store/admin.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/store/views.py" afterPath="$PROJECT_DIR$/store/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/thebook/urls.py" afterPath="$PROJECT_DIR$/thebook/urls.py" />
-=======
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/store/admin.py" afterPath="$PROJECT_DIR$/store/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/store/models.py" afterPath="$PROJECT_DIR$/store/models.py" />
->>>>>>> fb71c35a100a90c8d46d2fcdee1df6db5ddd4b65
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -31,8 +23,6 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-<<<<<<< HEAD
-    <leaf>
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/store/views.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -50,19 +40,12 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="241">
               <caret line="22" column="6" lean-forward="false" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
-=======
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/store/models.py">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
             <state relative-caret-position="511">
               <caret line="34" column="99" lean-forward="false" selection-start-line="34" selection-start-column="99" selection-end-line="34" selection-end-column="99" />
->>>>>>> 0a7c7689a4c9f2c708b21087a009175a440d5792
-=======
-            <state relative-caret-position="499">
-              <caret line="59" column="33" lean-forward="false" selection-start-line="59" selection-start-column="33" selection-end-line="59" selection-end-column="33" />
->>>>>>> fb71c35a100a90c8d46d2fcdee1df6db5ddd4b65
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -70,8 +53,6 @@
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
-<<<<<<< HEAD
       <file leaf-file-name="books.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/store/templates/books.html">
           <provider selected="true" editor-type-id="text-editor">
@@ -108,11 +89,7 @@
             <state relative-caret-position="-576">
               <caret line="50" column="1" lean-forward="true" selection-start-line="50" selection-start-column="1" selection-end-line="50" selection-end-column="1" />
               <folding />
-=======
-      <file leaf-file-name="admin.py" pinned="false" current-in-tab="false">
-=======
       <file leaf-file-name="admin.py" pinned="false" current-in-tab="true">
->>>>>>> fb71c35a100a90c8d46d2fcdee1df6db5ddd4b65
         <entry file="file://$PROJECT_DIR$/store/admin.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="126">
@@ -120,12 +97,10 @@
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
->>>>>>> 0a7c7689a4c9f2c708b21087a009175a440d5792
             </state>
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
       <file leaf-file-name="book.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/store/templates/book.html">
           <provider selected="true" editor-type-id="text-editor">
@@ -158,22 +133,12 @@
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/.local/lib/python3.5/site-packages/django/conf/urls/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="169">
               <caret line="18" column="4" lean-forward="false" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
-=======
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
-=======
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
->>>>>>> fb71c35a100a90c8d46d2fcdee1df6db5ddd4b65
-        <entry file="file://$PROJECT_DIR$/thebook/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-61">
-              <caret line="19" column="13" lean-forward="true" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
->>>>>>> 0a7c7689a4c9f2c708b21087a009175a440d5792
               <folding />
             </state>
           </provider>
@@ -200,9 +165,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-<<<<<<< HEAD
         <option value="$PROJECT_DIR$/store/admin.py" />
-<<<<<<< HEAD
         <option value="$PROJECT_DIR$/thebook/urls.py" />
         <option value="$PROJECT_DIR$/store/urls.py" />
         <option value="$PROJECT_DIR$/store/templates/book.html" />
@@ -210,13 +173,6 @@
         <option value="$PROJECT_DIR$/store/views.py" />
         <option value="$PROJECT_DIR$/store/templates/authors.html" />
         <option value="$PROJECT_DIR$/store/templates/books.html" />
-=======
-=======
->>>>>>> fb71c35a100a90c8d46d2fcdee1df6db5ddd4b65
-        <option value="$PROJECT_DIR$/thebook/settings.py" />
-        <option value="$PROJECT_DIR$/store/admin.py" />
-        <option value="$PROJECT_DIR$/store/models.py" />
->>>>>>> 0a7c7689a4c9f2c708b21087a009175a440d5792
       </list>
     </option>
   </component>
@@ -313,11 +269,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-<<<<<<< HEAD
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
-=======
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
->>>>>>> 0a7c7689a4c9f2c708b21087a009175a440d5792
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -331,7 +283,6 @@
       </list>
     </option>
   </component>
-<<<<<<< HEAD
   <component name="RunManager" selected="Django server.thebook">
     <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -575,29 +526,7 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-<<<<<<< HEAD
     <entry file="file://$USER_HOME$/.local/lib/python3.5/site-packages/django/conf/__init__.py">
-=======
-    <entry file="file://$PROJECT_DIR$/store/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="684">
-          <caret line="38" column="56" lean-forward="false" selection-start-line="38" selection-start-column="56" selection-end-line="38" selection-end-column="56" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thebook/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/store/admin.py">
->>>>>>> 0a7c7689a4c9f2c708b21087a009175a440d5792
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
           <caret line="5" column="29" lean-forward="true" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
@@ -637,7 +566,6 @@
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
     <entry file="file://$USER_HOME$/.local/lib/python3.5/site-packages/django/contrib/admin/sites.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="169">
@@ -652,20 +580,12 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-=======
     <entry file="file:///usr/local/lib/python3.5/dist-packages/django/contrib/admin/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#117#169#0" expanded="false" />
->>>>>>> 0a7c7689a4c9f2c708b21087a009175a440d5792
-          </folding>
-        </state>
-      </provider>
-    </entry>
-<<<<<<< HEAD
-<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/store/apps.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -720,7 +640,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-=======
     <entry file="file://$PROJECT_DIR$/store/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
@@ -735,20 +654,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="511">
           <caret line="34" column="99" lean-forward="false" selection-start-line="34" selection-start-column="99" selection-end-line="34" selection-end-column="99" />
->>>>>>> 0a7c7689a4c9f2c708b21087a009175a440d5792
-=======
-    <entry file="file://$PROJECT_DIR$/store/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="499">
-          <caret line="59" column="33" lean-forward="false" selection-start-line="59" selection-start-column="33" selection-end-line="59" selection-end-column="33" />
->>>>>>> fb71c35a100a90c8d46d2fcdee1df6db5ddd4b65
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/store/templates/author.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
@@ -787,12 +698,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="7" column="20" lean-forward="false" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
-=======
-    <entry file="file://$PROJECT_DIR$/thebook/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-61">
-          <caret line="19" column="13" lean-forward="true" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
->>>>>>> 0a7c7689a4c9f2c708b21087a009175a440d5792
           <folding />
         </state>
       </provider>
