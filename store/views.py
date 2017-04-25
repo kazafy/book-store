@@ -62,7 +62,19 @@ def login(request):
         email = request.POST['email']
         password = request.POST['password']
 
-        user = authenticate(request,)
+        user = authenticate(request,email=email,password=password)
+        if user:
+            if user.is_active:
+                login(request, user)
+                return HttpResponseRedirect('/')
+            else:
+             return HttpResponse('Your acount is disabled')
+        else:
+         print("Invlaid login details")
+         return  HttpResponse("Invlaid login details")
+    else:
+       return render(request,'login.html')
+
 
 
 
