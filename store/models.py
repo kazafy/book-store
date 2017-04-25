@@ -1,29 +1,41 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.validators import MaxValueValidator , MinValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator
+
+
 # Create your models here.
 
 
-class Author (models.Model):
-    image = models.ImageField()
+class Author(models.Model):
+    image = models.ImageField(upload_to='imgs', blank=True, null=True)
     name = models.CharField(max_length=50)
     country = models.CharField(max_length=50)
     dob = models.DateField()
-    user = models.ManyToManyField(User)
+    followers = models.ManyToManyField(User, null=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.name
 
-class Book (models.Model):
+
+class Book(models.Model):
     title = models.CharField(max_length=200)
     publish_date = models.DateField()
     summary = models.TextField()
+    cover = models.ImageField(upload_to='covers', blank=True, null=True)
     category = models.ForeignKey(Category)
     author = models.ForeignKey(Author)
-    rate = models.ManyToManyField(User,related_name='rates', through="RateUserBook")
-    readStatus = models.ManyToManyField(User,related_name='status' , through="BookState")
+    rate = models.ManyToManyField(User, related_name='rates', through="RateUserBook", null=True)
+    readStatus = models.ManyToManyField(User, related_name='status', through="BookState", null=True)
+
+    def __str__(self):
+        return self.title
 
 
 class RateUserBook(models.Model):
@@ -31,12 +43,12 @@ class RateUserBook(models.Model):
     book = models.ForeignKey(Book)
     rate = models.IntegerField(
         default=1,
-        validators=[MaxValueValidator(5),MinValueValidator(1)]
+        validators=[MaxValueValidator(5), MinValueValidator(1)]
     )
 
-class BookState(models.Model):
 
-    STATUS = (('0','read'),('1','Currently reading'),('2','Want to read'))
+class BookState(models.Model):
+    STATUS = (('0', 'read'), ('1', 'Currently reading'), ('2', 'Want to read'))
     user = models.ForeignKey(User)
     book = models.ForeignKey(Book)
     statues = models.CharField(max_length=1, choices=STATUS)
