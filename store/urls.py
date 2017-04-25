@@ -7,4 +7,5 @@ urlpatterns = [
 
     url(r'^author/$', views.getAuthors),
     url(r'^author/(?P<author_id>[0-9]+)$', views.getAuthor),
+    url(r'^register/$', views.register, name='register')
 ]
