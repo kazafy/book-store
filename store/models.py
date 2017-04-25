@@ -5,7 +5,6 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 
-
 class Author(models.Model):
     image = models.ImageField(upload_to='imgs', blank=True, null=True)
     name = models.CharField(max_length=50)
@@ -52,3 +51,10 @@ class BookState(models.Model):
     user = models.ForeignKey(User)
     book = models.ForeignKey(Book)
     statues = models.CharField(max_length=1, choices=STATUS)
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+    avatar = models.ImageField(upload_to='avatars', blank=True, null=True)
+
+    def __unicode__(self):
+        return self.user.username
