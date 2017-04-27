@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-{{ book.title }}
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %} Student Page{% endblock %}
+{% block body %}
+
+    {{ book.title }}
+
+
+{% endblock %}
+

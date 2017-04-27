@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-{{authors.last }}
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %} Student Page{% endblock %}
+{% block body %}
+
+
+    {% for a in authors %}
+        {{ a.name }}
+    {% empty %}
+         No authors in the List
+    {% endfor %}
+
+{% endblock %}
