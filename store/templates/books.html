@@ -2,32 +2,31 @@
 {% block title %} Student Page{% endblock %}
 {% block body %}
 <div class="row">
+<div class="ui four cards">
 {% for b in books %}
-          <div class="col s12 m6">
 
-        <div class="card horizontal">
-          <div class="card-image">
-            <img src="{{b.cover.url}}" >
-          </div>
-          <div class="card-stacked">
-            <div class="card-content">
-                <p>{{b.title}}</p>
-                <p>{{b.publish_date}}</p>
-                <p>{{b.author}}</p>
-                <p></p>
-            </div>
-            <div class="card-action">
-                <p>
-                  <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />
-                  <label for="filled-in-box">Follw</label>
-                </p>
-            </div>
-          </div>
+
+      <div class="card">
+        <div class="image">
+          <img src="{{b.cover.url}}">
+        </div>
+        <div class="extra">
+
+          Rating:
+          <div class="ui star rating" data-rating="5"></div>
         </div>
       </div>
 {% empty %}
  No Books in the List
 {% endfor %}
 </div>
+    </div>
 
+{% endblock %}
+{% block javascript %}
+  <script>
+        $('.ui.rating')
+          .rating()
+        ;
+  </script>
 {% endblock %}
