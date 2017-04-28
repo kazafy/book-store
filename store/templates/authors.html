@@ -1,12 +1,38 @@
 {% extends "base.html" %}
-{% block title %} Student Page{% endblock %}
+{% block title %}BookStore{% endblock %}
 {% block body %}
 
-
+    <div class="row">
     {% for a in authors %}
-        {{ a.name }}
+
+
+      <div class="col s12 m6">
+
+        <div class="card horizontal">
+          <div class="card-image">
+            <img src="{{a.image.url}}" >
+          </div>
+          <div class="card-stacked">
+            <div class="card-content">
+                <p>{{a.name}}</p>
+                <p>{{a.country}}</p>
+                <p>{{a.dob}}</p>
+                <p>{{a.}}</p>
+            </div>
+            <div class="card-action">
+                <p>
+                  <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />
+                  <label for="filled-in-box">Follw</label>
+                </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
     {% empty %}
          No authors in the List
     {% endfor %}
+    </div>
 
 {% endblock %}

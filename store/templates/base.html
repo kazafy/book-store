@@ -16,16 +16,19 @@
 
     <!--<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>-->
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>-->
-
+    {% load static %}
 </head>
 
-    <body>
+    <body class="grey lighten-4" >
+    <div style="text-align: center">
+        <img src='{% static "store/imgs/boo4.png" %}' >
+    </div>
 
 
-    <div class="navbar-fixed">
+    <div class="nav-wrapper  ">
     <nav>
-        <div class="nav-wrapper black">
-            <a href="/product" class="brand-logo">ITIans</a>
+        <div class="nav-wrapper grey darken-4">
+            <a href="/product" class="brand-logo">BookStore</a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 
             <div class="right hide-on-med-and-down">
@@ -76,26 +79,13 @@
     }
 </style>
 
-<div class="fixed-action-btn">
-<!--    <a class="btn-floating btn-large red">-->
-<!--        <i class="large material-icons">mode_edit</i>-->
-<!--    </a>-->
-<!--    <ul>-->
-<!--        <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>-->
-<!--        <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>-->
-<!--        <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>-->
-<!--        <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>-->
-<!--    </ul>-->
-
-    <a href="/product/new" class="req btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
-
-</div>
 
 
-</div>
-<footer class="page-footer black">
-    <div class="footer-copyright">
-        <div class="container">
+
+</div >
+<footer class="page-footer grey darken-4">
+    <div class="footer-copyright grey darken-4  ">
+        <div class="container  grey darken-4">
             © 2017 Copyright Text
             <a class="grey-text text-lighten-4 right" href="http://www.iti.gov.eg/">Information Technology Institute</a>
         </div>

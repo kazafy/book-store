@@ -3,6 +3,7 @@ from .models import *
 from .forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
+from django.conf.urls import  include, url
 
 
 
