@@ -12,5 +12,5 @@ urlpatterns = [
     url(r'^author/follow/(?P<author_id>[0-9]+)$', views.followAuthor),
     url(r'^author/unfollow/(?P<author_id>[0-9]+)$', views.unFollowAuthor),
     url(r'^register/$', views.register, name='register'),
-url(r'^login/$', views.login, name='login')
+    url(r'^login/$', views.login, name='login')
 ]
