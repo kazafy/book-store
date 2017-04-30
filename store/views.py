@@ -45,11 +45,9 @@ def getBookBy(request, key):
 
 
 def getBooks(request):
-    # o = Expand()
-    # o.first = 25
-    # print (o.first)
     books = Book.objects.all()
     user = User.objects.get(id=2);
+    authors = Author.objects.all()
 
     for i in range(len(books)):
 
@@ -58,18 +56,8 @@ def getBooks(request):
         books[i].avg =books[i].rateuserbook_set.all().aggregate(Avg('rate'))
         books[i].count =len(books[i].rateuserbook_set.all())
 
-
-        # if books[i].s:
-        #     print (books[i].s.statues)
-
-
-        # b.a = lambda: None
-        # if b.s:
-        #     setattr(b.a, 'state' , b.s.statues)
-        #     print(b.a.state)
-        # else:
-        #     setattr(b.a, 'state', "2")
-    return render(request, 'books.html', {'books': books, "user": user})
+    # return render(request, 'books.html', {'books': books, "user": user ,'authors': authors})
+    return render(request, 'home.html', {'books': books, "user": user ,'authors': authors})
 
 
 def getAuthor(request, author_id):
@@ -90,7 +78,7 @@ def followAuthor(request, author_id):
     author.followers.add(user)
     author.save()
     print(author.followers.all())
-    return render(request, 'authors.html', {'authors': user.author_set.all(), "user": user})
+    return JsonResponse({'follow':"unfollow"})
 
 
 def unFollowAuthor(request, author_id):
@@ -98,7 +86,7 @@ def unFollowAuthor(request, author_id):
     author = Author.objects.get(id=author_id)
     author.followers.remove(user)
     author.save()
-    return render(request, 'authors.html', {'authors': user.author_set.all(), "user": user})
+    return JsonResponse({'follow':"follow"})
 
 
 def wantToRead(request, book_id, state):

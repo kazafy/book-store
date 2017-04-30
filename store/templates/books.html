@@ -56,26 +56,5 @@
 
 {% endblock %}
 {% block javascript %}
-    <script>
-        $('.ui.rating')
-            .rating('setting', 'onRate', function(value ) {
-            $.ajax({
-                url: "/store/book/rate/"+this.id+"/"+value,
-                context: document.body,
-                success: function (data) {
-                    console.log("done")
-                }
-            });
-            });
 
-        function changeState(book_id , statu) {
-            $.ajax({
-                url: "/store/book/"+book_id+"/"+statu,
-                context: document.body,
-                success: function (data) {
-                    $('.statue_'+book_id).text(data.statue);
-                }
-            });
-        }
-    </script>
 {% endblock %}
