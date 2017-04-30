@@ -4,14 +4,20 @@ from .models import *
 from .forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.http import HttpResponseRedirect, HttpResponse
+from django.http import JsonResponse
+from django.db.models import  Avg
 from django.conf.urls import include, url
 
+<<<<<<< HEAD
 
 class Expand(object):
     pass
 
 
 # Create your views here.
+=======
+STATUS = ['Read', 'Currently Reading', 'Want to Read']
+>>>>>>> 20762c28dd92c9485cbed6dc948c94832a6ea6b4
 
 
 def index(request):
@@ -53,7 +59,15 @@ def getBooks(request):
     user = User.objects.get(id=2);
 
     for i in range(len(books)):
+<<<<<<< HEAD
         books[i].s = books[i].bookstate_set.filter(user=user).first()
+=======
+        books[i].s= books[i].bookstate_set.filter(user=user).first()
+        books[i].r= books[i].rateuserbook_set.filter(user=user).first()
+        books[i].avg =books[i].rateuserbook_set.all().aggregate(Avg('rate'))
+        books[i].count =len(books[i].rateuserbook_set.all())
+
+>>>>>>> 20762c28dd92c9485cbed6dc948c94832a6ea6b4
         # if books[i].s:
         #     print (books[i].s.statues)
 
@@ -99,7 +113,12 @@ def unFollowAuthor(request, author_id):
 def wantToRead(request, book_id, state):
     book = Book.objects.get(id=book_id)
     user = User.objects.get(id=2);
+<<<<<<< HEAD
     bookStatus = BookState.objects.filter(user=user, book=book)
+=======
+    bookStatus = BookState.objects.filter(user=user,book=book)
+
+>>>>>>> 20762c28dd92c9485cbed6dc948c94832a6ea6b4
     if bookStatus:
         b = bookStatus.first()
         b.statues = state
@@ -110,9 +129,33 @@ def wantToRead(request, book_id, state):
         bookStatus.user = user
         bookStatus.statues = state
         bookStatus.save()
+<<<<<<< HEAD
     # print(len(bookStatus.all()))
     books = Book.objects.all()
     return render(request, 'books.html', {'books': books, "user": user})
+=======
+
+    return JsonResponse({'statue': STATUS[int(state)]})
+
+def rate(request , book_id ,rate):
+    book = Book.objects.get(id=book_id)
+    user = User.objects.get(id=2);
+    rateBook = RateUserBook.objects.filter(user=user,book=book)
+
+    if rateBook:
+        b = rateBook.first()
+        b.rate = rate
+        b.save()
+    else:
+        rateBook = RateUserBook()
+        rateBook.book = book
+        rateBook.user = user
+        rateBook.statues = rate
+        rateBook.save()
+
+    return JsonResponse({'rate': rate})
+
+>>>>>>> 20762c28dd92c9485cbed6dc948c94832a6ea6b4
 
 
 def register(request):
