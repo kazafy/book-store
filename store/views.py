@@ -5,7 +5,7 @@ from .forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.http import JsonResponse
-from django.db.models import  Avg
+from django.db.models import  Avg ,Count
 from django.conf.urls import include, url
 
 
@@ -48,9 +48,13 @@ def getBookBy(request, key):
 
 
 def getBooks(request):
-    books = Book.objects.all()
+    books = Book.objects.all().order_by('-rateuserbook__rate')[:10]
+
     user = User.objects.get(id=2);
-    authors = Author.objects.all()
+    authors = Author.objects.all().\
+            annotate(consumption_times=Count('followers'))\
+            .order_by('consumption_times')[:10]
+
 
     for i in range(len(books)):
 
@@ -81,9 +85,10 @@ def getAuthors(request):
 def followAuthor(request, author_id):
     user = User.objects.get(id=2);
     author = Author.objects.get(id=author_id)
+    author.followers.remove(user)
+    author.save()
     author.followers.add(user)
     author.save()
-    print(author.followers.all())
     return JsonResponse({'follow':"unfollow"})
 
 
