@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load store_bookstatues %}
+{% block title %}My Area{% endblock %}
+{% block body %}
+
+<h1>my area</h1>
+{% endblock %}
+{% block javascript %}
+    <script>
+        $('.ui.rating')
+            .rating()
+        ;
+    </script>
+{% endblock %}

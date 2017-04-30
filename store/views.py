@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from .models import *
 from .forms import UserForm, UserProfileForm
@@ -5,15 +6,30 @@ from django.contrib.auth import authenticate, login as auth_login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.conf.urls import include, url
 
+
 class Expand(object):
     pass
+
 
 # Create your views here.
 
 
 def index(request):
-    pass
+    books = Book.objects.all()
+    authors = Author.objects.all()
+    return render(request, 'home.html', {'books': books,'authors': authors})
 
+
+def goArea(request):
+    return render(request, 'myArea.html')
+
+@login_required
+def exit(request):
+
+    logout(request)
+
+    # Take the user back to the homepage.
+    return HttpResponseRedirect('/store/')
 
 def getBook(request, book_id):
     book = Book.objects.get(id=book_id)
@@ -23,9 +39,8 @@ def getBook(request, book_id):
     return render(request, 'book.html', {'book': book})
 
 
-def getBookBy(request , key):
+def getBookBy(request, key):
     books = Book.objects.filter(title__contains=key)
-
 
     return render(request, 'books.html', {'books': books})
 
@@ -38,7 +53,7 @@ def getBooks(request):
     user = User.objects.get(id=2);
 
     for i in range(len(books)):
-        books[i].s= books[i].bookstate_set.filter(user=user).first()
+        books[i].s = books[i].bookstate_set.filter(user=user).first()
         # if books[i].s:
         #     print (books[i].s.statues)
 
@@ -49,7 +64,7 @@ def getBooks(request):
         #     print(b.a.state)
         # else:
         #     setattr(b.a, 'state', "2")
-    return render(request, 'books.html', {'books': books,"user":user})
+    return render(request, 'books.html', {'books': books, "user": user})
 
 
 def getAuthor(request, author_id):
@@ -60,7 +75,6 @@ def getAuthor(request, author_id):
 def getAuthors(request):
     authors = Author.objects.all()
     user = User.objects.get(id=2);
-
 
     return render(request, 'authors.html', {'authors': authors, "user": user})
 
@@ -82,10 +96,10 @@ def unFollowAuthor(request, author_id):
     return render(request, 'authors.html', {'authors': user.author_set.all(), "user": user})
 
 
-def wantToRead(request , book_id ,state):
+def wantToRead(request, book_id, state):
     book = Book.objects.get(id=book_id)
     user = User.objects.get(id=2);
-    bookStatus = BookState.objects.filter(user=user,book=book)
+    bookStatus = BookState.objects.filter(user=user, book=book)
     if bookStatus:
         b = bookStatus.first()
         b.statues = state
@@ -98,9 +112,7 @@ def wantToRead(request , book_id ,state):
         bookStatus.save()
     # print(len(bookStatus.all()))
     books = Book.objects.all()
-    return render(request, 'books.html', {'books': books,"user":user})
-
-
+    return render(request, 'books.html', {'books': books, "user": user})
 
 
 def register(request):
@@ -123,12 +135,12 @@ def register(request):
         else:
             print(user_form.errors, profile_form.errors)
             return HttpResponse(user_form.errors, profile_form.errors)
-        #     user_form = UserForm()
-        #     profile_form = UserProfileForm()
-        #
-        # return render(request, "register.html",
-        #               {'user_form': user_form, 'profile_form': profile_form, 'registered': registered
-        #                   , 'user_errors': user_form.errors, 'avatar_error': profile_form.errors})
+            #     user_form = UserForm()
+            #     profile_form = UserProfileForm()
+            #
+            # return render(request, "register.html",
+            #               {'user_form': user_form, 'profile_form': profile_form, 'registered': registered
+            #                   , 'user_errors': user_form.errors, 'avatar_error': profile_form.errors})
     else:
         user_form = UserForm()
         profile_form = UserProfileForm()
@@ -141,14 +153,14 @@ def login(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        print(username,password)
+        print(username, password)
         user = authenticate(username=username, password=password)
-        print("user:",user.id)
+        print("user:", user.id)
         if user:
             if user.is_active:
                 auth_login(request, user)
                 request.session['user_id'] = user.id
-                return HttpResponseRedirect('/store/book/')
+                return HttpResponseRedirect('/store/')
             else:
                 return HttpResponse('Your account is disabled')
         else:
