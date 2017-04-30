@@ -4,146 +4,128 @@
 {% block body %}
 
 
-<div class="ui grid">
-    <div class="row">
-        <div class="one wide column"></div>
-        <div class="fourteen wide column">
-            <div class="ui segments">
-                <div class="ui segment">
-                    <h3>Top Rated Books</h3>
+    <div class="ui grid">
+        <div class="row">
+            <div class="one wide column"></div>
+            <div class="fourteen wide column">
+                <div class="ui segments">
                     <div class="ui segment">
-                        <div class="ui six column grid">
-                            <div class="row ">
-                                {% for b in books %}
-                                <div class="column">
-                                    <div class="ui  card">
-                                        <div class="image">
-                                            <img src="{{ b.cover.url }}">
+                        <h3>Top Rated Books</h3>
+                        <div class="ui segment">
+                            <div class="ui six column grid">
+                                <div class="row ">
+                                    {% for b in books %}
+                                        <div class="column">
+                                            <div class="ui  card">
+                                                <div class="image">
+                                                    <img src="{{ b.cover.url }}">
+                                                </div>
+                                                <div class="extra">
+
+                                                    Rating:
+                                                    <div id="{{ b.id }}" class="ui star rating"
+                                                         data-rating="{{ b.r.rate }}"></div>
+                                                    rated :{{ b.avg.rate__avg }} count {{ b.count }}
+                                                </div>
+
+                                                <div class="ui compact menu">
+                                                    <div class="ui simple dropdown item">
+                                                        {% if   b.s %}
+
+                                                            <a class="statue_{{ b.id }}">
+                                                                {% if b.s.statues == "0" %}
+                                                                    Read
+                                                                {% elif b.s.statues == "1" %}
+                                                                    Currently Reading
+                                                                {% else %}
+                                                                    Want to Read
+                                                                {% endif %}
+                                                            </a>
+                                                        {% else %}
+                                                            <a class="statue_{{ b.id }}"
+                                                               href="/store/book/{{ b.id }}/2">Want to Read</a>
+                                                        {% endif %}
+                                                        <i class="dropdown icon"></i>
+                                                        <div id="statues_menu" class="menu">
+                                                            <a class="item" onclick="changeState({{ b.id }},0)">Read</a>
+                                                            <a class="item" onclick="changeState({{ b.id }},1)">Currently
+                                                                Reading</a>
+                                                            <a class="item" onclick="changeState({{ b.id }},2)">Want to
+                                                                Read</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
                                         </div>
-                    <div class="extra">
-
-                        Rating:
-                        <div id="{{ b.id }}" class="ui star rating" data-rating="{{ b.r.rate }}"></div>
-                        rated :{{ b.avg.rate__avg  }}  count {{ b.count }}
-                    </div>
-
-                    <div class="ui compact menu">
-                        <div class="ui simple dropdown item">
-                            {% if   b.s %}
-
-                                <a class="statue_{{ b.id }}" >
-                                    {% if b.s.statues == "0" %}
-                                        Read
-                                    {% elif b.s.statues == "1" %}
-                                        Currently Reading
-                                    {% else %}
-                                        Want to Read
-                                    {% endif %}
-                                </a>
-                            {% else %}
-                                <a class="statue_{{ b.id }}" href="/store/book/{{ b.id }}/2">Want to Read</a>
-                            {% endif %}
-                            <i class="dropdown icon"></i>
-                            <div id="statues_menu" class="menu">
-                                <a class="item" onclick="changeState({{ b.id }},0)" >Read</a>
-                                <a class="item" onclick="changeState({{ b.id }},1)"  >Currently Reading</a>
-                                <a class="item" onclick="changeState({{ b.id }},2)"  >Want to Read</a>
-                            </div>
-                        </div>
-                    </div>
-
-                                    </div>
+                                    {% empty %}
+                                        No Books in the List
+                                    {% endfor %}
                                 </div>
-                                {% empty %}
-                                No Books in the List
-                                {% endfor %}
                             </div>
+
                         </div>
 
                     </div>
+                </div>
+            </div>
 
+        </div>
+        <div class="row">
+            <div class="one wide column"></div>
+            <div class="fourteen wide column">
+                <div class="ui segments">
+
+                    <div class="ui segment">
+                        <h3>Top Authors</h3>
+                        <div class="ui segment">
+                            <div class="ui six column grid">
+                                <div class="row ">
+                                    {% for a in authors %}
+                                        <div class="column">
+                                            <div class=" ui card">
+                                                <div class="image">
+                                                    <img src="{{ a.image.url }}">
+                                                </div>
+                                                <div class="content">
+                                                    <div class="header">{{ a.name }}</div>
+                                                    <div class="meta">
+                                                        <a>Friends</a>
+                                                    </div>
+
+                                                </div>
+                                                <div class="extra content">
+                                                    <div class="ui one buttons">
+                                                        {% if user in a.followers.all %}
+                                                        <div  class="ui basic red button" onclick="follow(this,{{ a.id }})"> unfollow </div>
+                                                         {% else %}
+                                                        <div class="ui basic green  button" onclick="follow(this,{{ a.id }})"> follow </div>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% empty %}
+                                        You did'nt follow any author yet
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
 
     </div>
-    <div class="row">
-        <div class="one wide column"></div>
-        <div class="fourteen wide column">
-            <div class="ui segments">
-
-                <div class="ui segment">
-                    <h3>Top Authors</h3>
-                    <div class="ui segment">
-                        <div class="ui six column grid">
-                            <div class="row ">
-                                {% for a in authors %}
-                                <div class="column">
-                                    <div class=" ui card">
-                                        <div class="image">
-                                            <img src="{{a.image.url}}">
-                                        </div>
-                                        <div class="content">
-                                            <div class="header">{{a.name}}</div>
-                                            <div class="meta">
-                                                <a>Friends</a>
-                                            </div>
-                                            <div class="description">
-                                                {% if user in a.followers.all %}
-                                                <a href="/store/author/unfollow/{{ a.id }}">unfollow</a>
-                                                {% else %}
-                                                <a href="/store/author/follow/{{ a.id }}">follow</a>
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                        <div class="extra content">
-              <span class="right floated">
-                Joined in 2013
-              </span>
-                                            <span>
-                <i class="user icon"></i>
-                75 Friends
-              </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% empty %}
-                                No Books in the List
-                                {% endfor %}
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-    {% endblock %}
-    {% block javascript %}
+{% endblock %}
+{% block javascript %}
     <script>
         $('.ui.rating')
             .rating()
         ;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </script>
-    {% endblock %}
+{% endblock %}

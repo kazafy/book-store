@@ -168,6 +168,37 @@
                 }
             });
         }
+
+        function follow(th ,auth_id) {
+            console.log(th.innerText)
+
+            $.ajax({
+                url: "/store/author/"+th.innerText.trim()+"/"+auth_id,
+                context: document.body,
+                success: function (data) {
+                    th.innerText=data.follow;
+                    if(data.follow.trim() =="follow" )
+                        th.classList.add("green");
+                        th.classList.remove("red");
+                    if(data.follow.trim() =="unfollow" )
+                        th.classList.add("red");
+                        th.classList.remove("green");
+                    console.log(data)
+                }
+            });
+        }
+        function unfollow(th ,auth_id) {
+            console.log(th)
+{#            $.ajax({#}
+{#                url: "/store/author/unfollow/"+auth_id,#}
+{#                context: document.body,#}
+{#                success: function (data) {#}
+{#                    $('.statue_'+book_id).text(data.statue);#}
+{#                    console.log(data)#}
+{#                }#}
+{#            });#}
+        }
+
     </script>
 
 </body>

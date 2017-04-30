@@ -20,7 +20,10 @@ def index(request):
 
 
 def goArea(request):
-    return render(request, 'myArea.html')
+    books = Book.objects.all()
+    authors = Author.objects.all()
+    user = User.objects.get(id=2);
+    return render(request, 'myArea.html',{'books': books,'authors': authors , "user": user})
 
 @login_required
 def exit(request):
