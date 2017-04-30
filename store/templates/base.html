@@ -31,8 +31,7 @@
         <div id='notify'class=" right  ui icon  pointing dropdown button">
             <i id='icon'class="alarm mute outline icon"></i>
             <div id="msgs" class="menu">
-                <div class="header">Display Density</div>
-                <div class="item">Comfortable</div>
+                
 
             </div>
         </div>
@@ -143,6 +142,7 @@
             success: function(res){
             if(res.books>books_num){
                 console.log("new books")
+                books_num=res.books
                 $('#icon').attr('class','alarm icon')
                 $("#msgs").append('<div class="item">new books avalibale</div>');
             }else{console.log("no new books")}
@@ -161,6 +161,7 @@
             success: function(res){
             if(res.authors>authors_num){
                 console.log("new authors")
+                authors_num=res.authors
                  $('#icon').attr('class','alarm icon')
                  $("#msgs").append('<div class="item">new authors avalible</div>');
             }else{console.log("no new authors")}
@@ -170,8 +171,10 @@
             }
     Polling()
     $("#notify").click(function(){
+
     $('#icon').attr('class','alarm mute outline icon')
-    $("#msgs").empty();
+    setTimeout(function(){ $("#msgs").empty(); }, 3000);
+
 });
 
         $('.ui.rating')

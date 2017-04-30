@@ -6,54 +6,56 @@
         <div class="one wide column"></div>
         <div class="fourteen wide column">
             <div class="ui segments">
-
                 <div class="ui segment">
-                    <h3>Top Authors</h3>
+                    <h3>Authors</h3>
                     <div class="ui segment">
                         <div class="row">
                             <div class="ui grid">
+                                {% for a in authors %}
 
-    {% for a in authors %}
+                                <div class="three wide column">
+                                <div class="ui card">
+                                    <div class="image">
+                                        <img src="{{a.image.url}}">
+                                    </div>
+                                    <div class="content">
+                                        <div class="header">{{a.name}}</div>
+                                        <div class="meta">
+                                            <a>Friends</a>
+                                        </div>
+                                        <div class="description">
 
+                                            <div class="ui one buttons">
+                                                {% if user in a.followers.all %}
+                                                <div class="ui basic red button" onclick="follow(this,{{ a.id }})">
+                                                    unfollow
+                                                </div>
+                                                {% else %}
+                                                <div class="ui basic green  button" onclick="follow(this,{{ a.id }})">
+                                                    follow
+                                                </div>
+                                                {% endif %}
+                                            </div>
 
-
-          <div class="card">
-            <div class="image">
-              <img src="{{a.image.url}}">
-            </div>
-            <div class="content">
-              <div class="header">{{a.name}}</div>
-              <div class="meta">
-                <a>Friends</a>
-              </div>
-              <div class="description">
-
-                <div class="ui one buttons">
-                    {% if user in a.followers.all %}
-                    <div  class="ui basic red button" onclick="follow(this,{{ a.id }})"> unfollow </div>
-                     {% else %}
-                    <div class="ui basic green  button" onclick="follow(this,{{ a.id }})"> follow </div>
-                    {% endif %}
-                </div>
-
-              </div>
-            </div>
-            <div class="extra content">
+                                        </div>
+                                    </div>
+                                    <div class="extra content">
 
               <span class="right floated">
                 Joined in 2013
               </span>
-                                            <span>
+                                        <span>
                 <i class="user icon"></i>
                 75 Friends
               </span>
-                                        </div>
                                     </div>
                                 </div>
-                                {% empty %}
-                                You did'nt follow any author yet
-                                {% endfor %}
                             </div>
+                            {% empty %}
+                            You did'nt follow any author yet
+                            {% endfor %}
+
+                           </div>
                         </div>
 
                     </div>
@@ -61,12 +63,16 @@
                 </div>
             </div>
         </div>
-    </div>
 
-        {% endblock %}
-    {% block javascript %}
-    <script>
+
+    </div>  </div>
+
+
+{% endblock %}
+{% block javascript %}
+<script>
       books_num={{books_num}}
 authors_num={{authors_num}}
+
 </script>
-    {% endblock %}
+{% endblock %}
