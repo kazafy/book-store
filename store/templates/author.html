@@ -1,8 +1,46 @@
 {% extends "base.html" %}
 {% block title %} Student Page{% endblock %}
 {% block body %}
+<div class="ui grid">
+    <div class="row">
+        <div class="one wide column"></div>
+        <div class="fourteen wide column">
+            <div class="ui segments">
+                <div class="ui segment">
+                    <h3>{{author.name}}</h3>
+                    <div class="ui segment">
+                        <div class="ui divided items">
+                            <div class="item">
+                                <div class="image">
+                                    <img src="{{author.image.url}}">
+                                </div>
+                                <div class="content">
+                                    <a class="header">{{author.country}}</a>
+                                    <div class="meta">
+                                        <span class="cinema">{{author.dob}}</span>
+                                    </div>
+                                    <div class="description">
+                                        <label>His Books :</label>
+                                        {%for b in hisBooks%}
+                                        <p>{{b.title}}</p>
+                                        {%endfor%}
+                                    </div>
+                                    <div class="extra">
 
-{{ author.name }}
+                                        <div class="ui label">{{hisFollowers}} Followers</div>
+                                        <div class="ui  primary button">
+                                            Follow <i class="right chevron icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
 

@@ -1,43 +1,58 @@
 {% extends "base.html" %}
 {% block title %}BookStore{% endblock %}
 {% block body %}
+<div class="ui grid">
+    <div class="row">
+        <div class="one wide column"></div>
+        <div class="fourteen wide column">
+            <div class="ui segments">
 
-   <div class="ui link cards">
-    {% for a in authors %}
-
-
-
-          <div class="card">
-            <div class="image">
-              <img src="{{a.image.url}}">
-            </div>
-            <div class="content">
-              <div class="header">{{a.name}}</div>
-              <div class="meta">
-                <a>Friends</a>
-              </div>
-              <div class="description">
-                  {% if user in a.followers.all %}
-                      <a href="/store/author/unfollow/{{ a.id }}">unfollow</a>
-                  {% else %}
-                      <a href="/store/author/follow/{{ a.id }}">follow</a>
-                  {% endif %}
-              </div>
-            </div>
-            <div class="extra content">
+                <div class="ui segment">
+                    <h3>Top Authors</h3>
+                    <div class="ui segment">
+                        <div class="row">
+                            <div class="ui grid">
+                                {% for a in authors %}
+                                <div class="three wide column">
+                                    <div class=" ui card">
+                                        <div class="image">
+                                            <img src="{{a.image.url}}">
+                                        </div>
+                                        <div class="content">
+                                            <div class="header">{{a.name}}</div>
+                                            <div class="meta">
+                                                <a>Friends</a>
+                                            </div>
+                                            <div class="description">
+                                                {% if user in a.followers.all %}
+                                                <a href="/store/author/unfollow/{{ a.id }}">unfollow</a>
+                                                {% else %}
+                                                <a href="/store/author/follow/{{ a.id }}">follow</a>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="extra content">
               <span class="right floated">
                 Joined in 2013
               </span>
-              <span>
+                                            <span>
                 <i class="user icon"></i>
                 75 Friends
               </span>
-            </div>
-          </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% empty %}
+                                You did'nt follow any author yet
+                                {% endfor %}
+                            </div>
+                        </div>
 
-    {% empty %}
-         No authors in the List
-    {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 
-{% endblock %}
+        {% endblock %}
