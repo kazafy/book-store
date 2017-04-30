@@ -17,7 +17,11 @@
                 <a>Friends</a>
               </div>
               <div class="description">
-                Matthew is an interior designer living in New York.
+                  {% if user in a.followers.all %}
+                      <a href="/store/author/unfollow/{{ a.id }}">unfollow</a>
+                  {% else %}
+                      <a href="/store/author/follow/{{ a.id }}">follow</a>
+                  {% endif %}
               </div>
             </div>
             <div class="extra content">
