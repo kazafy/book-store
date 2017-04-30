@@ -17,7 +17,7 @@ authors_num=len(Author.objects.all())
 
 
 def index(request):
-    books = Book.objects.all().order_by('-rateuserbook__rate')[:10]
+    books = Book.objects.all()#.order_by('-rateuserbook__rate')[:10]
 
     user = User.objects.get(id=request.session['user_id']);
     authors = Author.objects.all().\
@@ -30,15 +30,21 @@ def index(request):
         books[i].r= books[i].rateuserbook_set.filter(user=user).first()
         books[i].avg =books[i].rateuserbook_set.all().aggregate(Avg('rate'))
         books[i].count =len(books[i].rateuserbook_set.all())
-        print(i)
-        print(books[i].r.rate)
+
     return render(request, 'home.html', {'books': books,'authors': authors,'books_num':books_num,'authors_num':authors_num})
 
 
 def goArea(request):
     books = Book.objects.all()
-    authors = Author.objects.all()
+    authors = Author.objects.all()[:10]
     user = User.objects.get(id=request.session['user_id']);
+
+    for i in range(len(books)):
+        books[i].s= books[i].bookstate_set.filter(user=user).first()
+        books[i].r= books[i].rateuserbook_set.filter(user=user).first()
+        books[i].avg =books[i].rateuserbook_set.all().aggregate(Avg('rate'))
+        books[i].count =len(books[i].rateuserbook_set.all())
+
 
     return render(request, 'myArea.html',{'books': books,'authors': authors,'books_num':books_num,'authors_num':authors_num})
 
@@ -67,7 +73,7 @@ def getBookBy(request, key):
 
 
 def getBooks(request):
-    books = Book.objects.all().order_by('-rateuserbook__rate')
+    books = Book.objects.all()
 
     user = User.objects.get(id=request.session['user_id']);
     authors = Author.objects.all().\
