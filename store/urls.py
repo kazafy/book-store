@@ -8,5 +8,5 @@ urlpatterns = [
     url(r'^author/$', views.getAuthors),
     url(r'^author/(?P<author_id>[0-9]+)$', views.getAuthor),
     url(r'^register/$', views.register, name='register'),
-url(r'^login/$', views.login, name='login')
+    url(r'^login/$', views.login, name='login')
 ]

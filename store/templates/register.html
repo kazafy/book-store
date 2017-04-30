@@ -1,23 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Register</title>
-</head>
-<body>
-    <h1>Register with BookStore</h1>
-    {%if registered%}
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+    <{% block css %}
+      <style type="text/css">
+    body {
+      background-color: #DADADA;
+    }
+    body > .grid {
+      height: 100%;
+    }
+    .image {
+      margin-top: -100px;
+    }
+    .column {
+      max-width: 450px;
+    }
+  </style>
+{% endblock %}
+    {% block body %}
+       {%if registered%}
          <strong>thank you for registering!</strong>
         <a href="/">Return to the homepage.</a><br />
     {%else%}
-        <strong>register here!</strong><br />
-        <form id="user_form" method="post" action="store/register/" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ user_form.as_p }}
-            {{ profile_form.as_p }}
-            <input type="submit" name="submit" value="Register" />
+<div class="ui middle aligned center aligned grid">
+  <div class="column">
 
-        </form>
+    <form class="ui large form" id="user_form" method="post" action="/store/register/" enctype="multipart/form-data">
+        {%csrf_token%}
+      <div class="ui stacked segment">
+        <div class="field">
+            <label >Email</label>
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+              {{ user_form.email }}
+
+          </div>
+        </div>
+          <div class="field">
+              <label >UserName</label>
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+              {{ user_form.username }}
+
+          </div>
+        </div>
+        <div class="field">
+             <label >Password</label>
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            {{ user_form.password }}
+          </div>
+        </div>
+           <div class="field">
+             <label >Avatar</label>
+          <div class="ui left icon input">
+            <!--<i class="lock icon"></i>-->
+            {{ profile_form.avatar }}
+          </div>
+        </div>
+        <div ><button class="ui fluid large teal submit button" type="submit">Submit</button></div>
+      </div>
+
+{{user_errors}}
+    </form>
+            <!--{% if user_errors  %}-->
+error
+      <div class="ui error message" style="display: block;">
+          error
+        <!--{{user_errors}}-->
+
+      </div>
+        <!--{% endif %}-->
+
+  </div>
+</div>
+
+        <!--<strong>register here!</strong><br />-->
+        <!--<form id="user_form" method="post" action="/store/register/" enctype="multipart/form-data">-->
+            <!--{% csrf_token %}-->
+            <!--{{ user_form.as_p }}-->
+            <!--{{ profile_form.as_p }}-->
+            <!--<input type="submit" name="submit" value="Register" />-->
+
+        <!--</form>-->
     {%endif%}
-</body>
-</html>
+{% endblock %}
