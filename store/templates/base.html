@@ -101,8 +101,34 @@
 <script>$('.ui.dropdown')
   .dropdown();
 </script>
+
+    <script>
+        $('.ui.rating')
+            .rating('setting', 'onRate', function(value ) {
+            $.ajax({
+                url: "/store/book/rate/"+this.id+"/"+value,
+                context: document.body,
+                success: function (data) {
+                    console.log("done")
+                }
+            });
+            });
+
+        function changeState(book_id , statu) {
+            $.ajax({
+                url: "/store/book/"+book_id+"/"+statu,
+                context: document.body,
+                success: function (data) {
+                    $('.statue_'+book_id).text(data.statue);
+                }
+            });
+        }
+    </script>
+
+
 {% block javascript %}{% endblock %}
     <script>
+
 
         $('.ui.rating')
             .rating()
@@ -147,6 +173,58 @@
     $('#icon').attr('class','alarm mute outline icon')
     $("#msgs").empty();
 });
+
+        $('.ui.rating')
+            .rating('setting', 'onRate', function(value ) {
+            $.ajax({
+                url: "/store/book/rate/"+this.id+"/"+value,
+                context: document.body,
+                success: function (data) {
+                    console.log("done")
+                }
+            });
+            });
+
+        function changeState(book_id , statu) {
+            $.ajax({
+                url: "/store/book/"+book_id+"/"+statu,
+                context: document.body,
+                success: function (data) {
+                    $('.statue_'+book_id).text(data.statue);
+                }
+            });
+        }
+
+        function follow(th ,auth_id) {
+            console.log(th.innerText)
+
+            $.ajax({
+                url: "/store/author/"+th.innerText.trim()+"/"+auth_id,
+                context: document.body,
+                success: function (data) {
+                    th.innerText=data.follow;
+                    if(data.follow.trim() =="follow" )
+                        th.classList.add("green");
+                        th.classList.remove("red");
+                    if(data.follow.trim() =="unfollow" )
+                        th.classList.add("red");
+                        th.classList.remove("green");
+                    console.log(data)
+                }
+            });
+        }
+        function unfollow(th ,auth_id) {
+            console.log(th)
+{#            $.ajax({#}
+{#                url: "/store/author/unfollow/"+auth_id,#}
+{#                context: document.body,#}
+{#                success: function (data) {#}
+{#                    $('.statue_'+book_id).text(data.statue);#}
+{#                    console.log(data)#}
+{#                }#}
+{#            });#}
+        }
+
 
     </script>
 

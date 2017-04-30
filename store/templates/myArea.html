@@ -85,10 +85,13 @@
                                     </div>
                                 </div>
                                 <div class="extra content">
-                                    <div class="ui two buttons">
-                                        <div class="ui basic green button">Approve</div>
-                                        <div class="ui basic red button">Decline</div>
-                                    </div>
+                                                    <div class="ui one buttons">
+                                                        {% if user in a.followers.all %}
+                                                        <div  class="ui basic red button" onclick="follow(this,{{ a.id }})"> unfollow </div>
+                                                         {% else %}
+                                                        <div class="ui basic green  button" onclick="follow(this,{{ a.id }})"> follow </div>
+                                                        {% endif %}
+                                                    </div>
                                 </div>
                             </div>
                             {% empty %}

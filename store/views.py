@@ -5,7 +5,7 @@ from .forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.http import JsonResponse
-from django.db.models import  Avg
+from django.db.models import  Avg ,Count
 from django.conf.urls import include, url
 
 
@@ -17,15 +17,31 @@ authors_num=len(Author.objects.all())
 
 
 def index(request):
-    books = Book.objects.all()
-    authors = Author.objects.all()
+    books = Book.objects.all().order_by('-rateuserbook__rate')[:10]
+
+    user = User.objects.get(id=request.session['user_id']);
+    authors = Author.objects.all().\
+            annotate(consumption_times=Count('followers'))\
+            .order_by('consumption_times')[:10]
+
+
+    for i in range(len(books)):
+        books[i].s= books[i].bookstate_set.filter(user=user).first()
+        books[i].r= books[i].rateuserbook_set.filter(user=user).first()
+        books[i].avg =books[i].rateuserbook_set.all().aggregate(Avg('rate'))
+        books[i].count =len(books[i].rateuserbook_set.all())
+        print(i)
+        print(books[i].r.rate)
     return render(request, 'home.html', {'books': books,'authors': authors,'books_num':books_num,'authors_num':authors_num})
 
 
 def goArea(request):
     books = Book.objects.all()
     authors = Author.objects.all()
+    user = User.objects.get(id=request.session['user_id']);
+
     return render(request, 'myArea.html',{'books': books,'authors': authors,'books_num':books_num,'authors_num':authors_num})
+
 
 @login_required
 def exit(request):
@@ -51,14 +67,15 @@ def getBookBy(request, key):
 
 
 def getBooks(request):
-    # o = Expand()
-    # o.first = 25
-    # print (o.first)
-    books = Book.objects.all()
-    user = User.objects.get(id=2);
+    books = Book.objects.all().order_by('-rateuserbook__rate')
+
+    user = User.objects.get(id=request.session['user_id']);
+    authors = Author.objects.all().\
+            annotate(consumption_times=Count('followers'))\
+            .order_by('consumption_times')
+
 
     for i in range(len(books)):
-
         books[i].s= books[i].bookstate_set.filter(user=user).first()
         books[i].r= books[i].rateuserbook_set.filter(user=user).first()
         books[i].avg =books[i].rateuserbook_set.all().aggregate(Avg('rate'))
@@ -78,6 +95,7 @@ def getBooks(request):
     return render(request, 'books.html', {'books': books, "user": user,'books_num':books_num,'authors_num':authors_num})
 
 
+
 def getAuthor(request, author_id):
     author = Author.objects.get(id=author_id)
     hisBooks=Book.objects.filter(author=author)
@@ -88,31 +106,35 @@ def getAuthor(request, author_id):
 
 def getAuthors(request):
     authors = Author.objects.all()
-    user = User.objects.get(id=2);
-
+    user = User.objects.get(id=request.session['user_id']);
     return render(request, 'authors.html', {'authors': authors, "user": user,'books_num':books_num,'authors_num':authors_num})
 
 
 def followAuthor(request, author_id):
-    user = User.objects.get(id=2);
-    author = Author.objects.get(id=author_id)
-    author.followers.add(user)
-    author.save()
-    print(author.followers.all())
-    return render(request, 'authors.html', {'authors': user.author_set.all(), "user": user,'books_num':books_num,'authors_num':authors_num})
-
-
-def unFollowAuthor(request, author_id):
-    user = User.objects.get(id=2);
+    user = User.objects.get(id=request.session['user_id']);
     author = Author.objects.get(id=author_id)
     author.followers.remove(user)
     author.save()
-    return render(request, 'authors.html', {'authors': user.author_set.all(), "user": user,'books_num':books_num,'authors_num':authors_num})
+    author.followers.add(user)
+    author.save()
+
+    return JsonResponse({'follow':"unfollow"})
+
+
+
+def unFollowAuthor(request, author_id):
+    user = User.objects.get(id=request.session['user_id']);
+    author = Author.objects.get(id=author_id)
+    author.followers.remove(user)
+    author.save()
+
+    return JsonResponse({'follow':"follow"})
+
 
 
 def wantToRead(request, book_id, state):
     book = Book.objects.get(id=book_id)
-    user = User.objects.get(id=2);
+    user = User.objects.get(id=request.session['user_id']);
 
     bookStatus = BookState.objects.filter(user=user,book=book)
 
@@ -156,7 +178,7 @@ def authorNotify(request, num):
 
 def rate(request , book_id ,rate):
     book = Book.objects.get(id=book_id)
-    user = User.objects.get(id=2);
+    user = User.objects.get(id=request.session['user_id']);
     rateBook = RateUserBook.objects.filter(user=user,book=book)
 
     if rateBook:

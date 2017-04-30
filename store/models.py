@@ -33,6 +33,9 @@ class Book(models.Model):
     rate = models.ManyToManyField(User, related_name='rates', through="RateUserBook", null=True)
     readStatus = models.ManyToManyField(User, related_name='status', through="BookState", null=True)
 
+    class Meta:
+        ordering = ['-id']
+
     def __str__(self):
         return self.title
 

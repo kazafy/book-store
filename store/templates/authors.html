@@ -12,26 +12,34 @@
                     <div class="ui segment">
                         <div class="row">
                             <div class="ui grid">
-                                {% for a in authors %}
-                                <div class="three wide column">
-                                    <div class=" ui card">
-                                        <div class="image">
-                                            <img src="{{a.image.url}}">
-                                        </div>
-                                        <div class="content">
-                                            <div class="header"><a href="/store/author/{{ a.id }}">{{a.name}}</a></div>
-                                            <div class="meta">
-                                                <a>Friends</a>
-                                            </div>
-                                            <div class="description">
-                                                {% if user in a.followers.all %}
-                                                <a href="/store/author/unfollow/{{ a.id }}">unfollow</a>
-                                                {% else %}
-                                                <a href="/store/author/follow/{{ a.id }}">follow</a>
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                        <div class="extra content">
+
+    {% for a in authors %}
+
+
+
+          <div class="card">
+            <div class="image">
+              <img src="{{a.image.url}}">
+            </div>
+            <div class="content">
+              <div class="header">{{a.name}}</div>
+              <div class="meta">
+                <a>Friends</a>
+              </div>
+              <div class="description">
+
+                <div class="ui one buttons">
+                    {% if user in a.followers.all %}
+                    <div  class="ui basic red button" onclick="follow(this,{{ a.id }})"> unfollow </div>
+                     {% else %}
+                    <div class="ui basic green  button" onclick="follow(this,{{ a.id }})"> follow </div>
+                    {% endif %}
+                </div>
+
+              </div>
+            </div>
+            <div class="extra content">
+
               <span class="right floated">
                 Joined in 2013
               </span>
