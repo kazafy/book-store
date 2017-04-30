@@ -5,6 +5,8 @@ from django.contrib.auth import authenticate, login as auth_login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.conf.urls import include, url
 
+class Expand(object):
+    pass
 
 # Create your views here.
 
@@ -15,13 +17,39 @@ def index(request):
 
 def getBook(request, book_id):
     book = Book.objects.get(id=book_id)
+    user = User.objects.get(id=2);
+
+    print(book.bookstate_set.filter(user=user).first().statues)
     return render(request, 'book.html', {'book': book})
 
 
-def getBooks(request):
-    books = Book.objects.all()
-    print(len(books))
+def getBookBy(request , key):
+    books = Book.objects.filter(title__contains=key)
+
+
     return render(request, 'books.html', {'books': books})
+
+
+def getBooks(request):
+    # o = Expand()
+    # o.first = 25
+    # print (o.first)
+    books = Book.objects.all()
+    user = User.objects.get(id=2);
+
+    for i in range(len(books)):
+        books[i].s= books[i].bookstate_set.filter(user=user).first()
+        # if books[i].s:
+        #     print (books[i].s.statues)
+
+
+        # b.a = lambda: None
+        # if b.s:
+        #     setattr(b.a, 'state' , b.s.statues)
+        #     print(b.a.state)
+        # else:
+        #     setattr(b.a, 'state', "2")
+    return render(request, 'books.html', {'books': books,"user":user})
 
 
 def getAuthor(request, author_id):
@@ -31,7 +59,48 @@ def getAuthor(request, author_id):
 
 def getAuthors(request):
     authors = Author.objects.all()
-    return render(request, 'authors.html', {'authors': authors})
+    user = User.objects.get(id=2);
+
+
+    return render(request, 'authors.html', {'authors': authors, "user": user})
+
+
+def followAuthor(request, author_id):
+    user = User.objects.get(id=2);
+    author = Author.objects.get(id=author_id)
+    author.followers.add(user)
+    author.save()
+    print(author.followers.all())
+    return render(request, 'authors.html', {'authors': user.author_set.all(), "user": user})
+
+
+def unFollowAuthor(request, author_id):
+    user = User.objects.get(id=2);
+    author = Author.objects.get(id=author_id)
+    author.followers.remove(user)
+    author.save()
+    return render(request, 'authors.html', {'authors': user.author_set.all(), "user": user})
+
+
+def wantToRead(request , book_id ,state):
+    book = Book.objects.get(id=book_id)
+    user = User.objects.get(id=2);
+    bookStatus = BookState.objects.filter(user=user,book=book)
+    if bookStatus:
+        b = bookStatus.first()
+        b.statues = state
+        b.save()
+    else:
+        bookStatus = BookState()
+        bookStatus.book = book
+        bookStatus.user = user
+        bookStatus.statues = state
+        bookStatus.save()
+    # print(len(bookStatus.all()))
+    books = Book.objects.all()
+    return render(request, 'books.html', {'books': books,"user":user})
+
+
 
 
 def register(request):

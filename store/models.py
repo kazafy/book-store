@@ -10,7 +10,7 @@ class Author(models.Model):
     name = models.CharField(max_length=50)
     country = models.CharField(max_length=50)
     dob = models.DateField()
-    followers = models.ManyToManyField(User, null=True)
+    followers = models.ManyToManyField(User)
 
     def __str__(self):
         return self.name
@@ -50,11 +50,13 @@ class BookState(models.Model):
     STATUS = (('0', 'read'), ('1', 'Currently reading'), ('2', 'Want to read'))
     user = models.ForeignKey(User)
     book = models.ForeignKey(Book)
-    statues = models.CharField(max_length=1, choices=STATUS)
+    statues = models.CharField(max_length=1, choices=STATUS , default='0')
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     avatar = models.ImageField(upload_to='avatars', blank=True, null=True)
+    authors = models.ManyToManyField(Author)
 
     def __unicode__(self):
         return self.user.username

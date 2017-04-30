@@ -21,6 +21,13 @@
           <i class="search icon"></i>
         </div>
       </div>
+<div class="ui menu">
+  <div class="item">
+    <div class="ui icon input">
+      <form method="get" action="/store/book/search/">
+          <input name="q" type="text" placeholder="Search...">
+          <i class="search icon"></i>
+      </form>
 
     </div>
 
@@ -81,11 +88,11 @@
 
 
 
-      <script
+    <script
       src="https://code.jquery.com/jquery-3.1.1.min.js"
       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
       crossorigin="anonymous"></script>
-    <script src="semantic/dist/semantic.min.js"></script>
+        <script src="/static/store/js/semantic.min.js"></script>
       {% block javascript %}{% endblock %}
     </body>
   </html>
