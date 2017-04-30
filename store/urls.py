@@ -14,7 +14,7 @@ urlpatterns = [
     url(r'^author/unfollow/(?P<author_id>[0-9]+)$', views.unFollowAuthor),
     url(r'^register/$', views.register, name='register'),
     url(r'^login/$', views.login, name='login'),
-    #url(r'^home/$', views.index, name='index'),
+    url(r'^home/$', views.index, name='index'),
     url(r'^$', views.index, name='index'),
     url(r'^myArea/$', views.goArea, name='area'),
     url(r'^logout/$', views.exit, name='area')
