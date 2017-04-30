@@ -17,5 +17,7 @@ urlpatterns = [
     url(r'^home/$', views.index, name='index'),
     url(r'^$', views.index, name='index'),
     url(r'^myArea/$', views.goArea, name='area'),
-    url(r'^logout/$', views.exit, name='area')
+    url(r'^logout/$', views.exit, name='area'),
+    url(r'^book/notify/(?P<num>[0-9]+)/$', views.bookNotify, name='bookNotify'),
+url(r'^author/notify/(?P<num>[0-9]+)/$', views.authorNotify, name='authorNotify')
 ]

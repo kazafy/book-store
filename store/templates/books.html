@@ -18,8 +18,9 @@
 
                                 <div class="three wide column">
                                     <div class="ui card">
-                                        <div class="image">
+                                        <div class="image" style="text-align: center;">
                                             <img src="{{ b.cover.url }}">
+                                            <a href="/store/book/{{ b.id }}"><h4 >{{b.title}}</h4></a>
                                         </div>
                                         <div class="extra">
 
@@ -71,11 +72,15 @@
             </div>
         </div>
 
-    </div>
+    </div>  </div>
 
     {% endblock %}
     {% block javascript %}
     <script>
+
+      books_num={{books_num}}
+authors_num={{authors_num}}
+
         $('.ui.rating')
             .rating('setting', 'onRate', function(value ) {
             $.ajax({

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %} Student Page{% endblock %}
+{% block title %} {{book.title}}{% endblock %}
 {% block body %}
 
     <div class="ui grid">
@@ -8,30 +8,32 @@
         <div class="fourteen wide column">
             <div class="ui segments">
                 <div class="ui segment">
-                    <h3>{{author.name}}</h3>
+                    <h3>{{book.title}}</h3>
                     <div class="ui segment">
                         <div class="ui divided items">
                             <div class="item">
                                 <div class="image">
-                                    <img src="{{author.image.url}}">
+                                    <img src="{{book.cover.url}}">
                                 </div>
                                 <div class="content">
-                                    <a class="header">{{author.country}}</a>
+                                    <a class="header">{{book.category}}</a>
+
                                     <div class="meta">
-                                        <span class="cinema">{{author.dob}}</span>
+                                        <span class="cinema">{{book.publish_date}}</span>
+                                        <a href="/store/author/{{ book.author.id }}"><p class="cinema">{{book.author.name}}</p></a>
                                     </div>
                                     <div class="description">
-                                        <label>His Books :</label>
-                                        {%for b in hisBooks%}
-                                        <p>{{b.title}}</p>
-                                        {%endfor%}
+                                        <label>Summary :</label>
+
+                                        <p>{{book.summary}}</p>
+
                                     </div>
                                     <div class="extra">
 
-                                        <div class="ui label">{{hisFollowers}} Followers</div>
-                                        <div class="ui  primary button">
-                                            Follow <i class="right chevron icon"></i>
-                                        </div>
+                                        Rating:
+                                            <div class="ui disabled star rating" data-rating="{{ book.avg }}"></div>
+                                        <div class="ui label"> rated by :{{book.count}} user </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -45,5 +47,11 @@
 
 
 
+{% endblock %}
+{% block javascript %}
+<script>
+      books_num={{books_num}}
+authors_num={{authors_num}}
+</script>
 {% endblock %}
 

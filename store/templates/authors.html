@@ -19,7 +19,7 @@
                                             <img src="{{a.image.url}}">
                                         </div>
                                         <div class="content">
-                                            <div class="header">{{a.name}}</div>
+                                            <div class="header"><a href="/store/author/{{ a.id }}">{{a.name}}</a></div>
                                             <div class="meta">
                                                 <a>Friends</a>
                                             </div>
@@ -56,3 +56,9 @@
     </div>
 
         {% endblock %}
+    {% block javascript %}
+    <script>
+      books_num={{books_num}}
+authors_num={{authors_num}}
+</script>
+    {% endblock %}

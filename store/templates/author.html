@@ -20,17 +20,19 @@
                                         <span class="cinema">{{author.dob}}</span>
                                     </div>
                                     <div class="description">
-                                        <label>His Books :</label>
+                                        <h4>Books :</h4>
                                         {%for b in hisBooks%}
-                                        <p>{{b.title}}</p>
+                                        <span>{{b.title}} ,</span>
                                         {%endfor%}
                                     </div>
                                     <div class="extra">
 
                                         <div class="ui label">{{hisFollowers}} Followers</div>
+                                        {%if user.is_authenticated%}
                                         <div class="ui  primary button">
                                             Follow <i class="right chevron icon"></i>
                                         </div>
+                                        {%endif%}
                                     </div>
                                 </div>
                             </div>
@@ -43,5 +45,11 @@
 </div>
 
 {% endblock %}
+  {% block javascript %}
+<script>
+      books_num={{books_num}}
+authors_num={{authors_num}}
+</script>
 
+{% endblock %}
 

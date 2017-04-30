@@ -11,18 +11,21 @@ from django.conf.urls import include, url
 
 STATUS = ['Read', 'Currently Reading', 'Want to Read']
 
+books_num=len(Book.objects.all())
+authors_num=len(Author.objects.all())
+
 
 
 def index(request):
     books = Book.objects.all()
     authors = Author.objects.all()
-    return render(request, 'home.html', {'books': books,'authors': authors})
+    return render(request, 'home.html', {'books': books,'authors': authors,'books_num':books_num,'authors_num':authors_num})
 
 
 def goArea(request):
     books = Book.objects.all()
     authors = Author.objects.all()
-    return render(request, 'myArea.html',{'books': books,'authors': authors})
+    return render(request, 'myArea.html',{'books': books,'authors': authors,'books_num':books_num,'authors_num':authors_num})
 
 @login_required
 def exit(request):
@@ -34,16 +37,17 @@ def exit(request):
 
 def getBook(request, book_id):
     book = Book.objects.get(id=book_id)
-    user = User.objects.get(id=request.session['user_id']);
-
-    print(book.bookstate_set.filter(user=user).first().statues)
-    return render(request, 'book.html', {'book': book})
+    # user = User.objects.get(id=request.session['user_id']);
+    book.avg = book.rateuserbook_set.all().aggregate(Avg('rate'))
+    book.count = len(book.rateuserbook_set.all())
+    # print(book.bookstate_set.filter(user=user).first().statues)
+    return render(request, 'book.html', {'book': book,'books_num':books_num,'authors_num':authors_num})
 
 
 def getBookBy(request, key):
     books = Book.objects.filter(title__contains=key)
 
-    return render(request, 'books.html', {'books': books})
+    return render(request, 'books.html', {'books': books,'books_num':books_num,'authors_num':authors_num})
 
 
 def getBooks(request):
@@ -71,7 +75,7 @@ def getBooks(request):
         #     print(b.a.state)
         # else:
         #     setattr(b.a, 'state', "2")
-    return render(request, 'books.html', {'books': books, "user": user})
+    return render(request, 'books.html', {'books': books, "user": user,'books_num':books_num,'authors_num':authors_num})
 
 
 def getAuthor(request, author_id):
@@ -79,14 +83,14 @@ def getAuthor(request, author_id):
     hisBooks=Book.objects.filter(author=author)
     hisFollowers=len(author.followers.all())
     print(hisFollowers)
-    return render(request, 'author.html', {'author': author,'hisBooks': hisBooks,'hisFollowers':hisFollowers})
+    return render(request, 'author.html', {'author': author,'hisBooks': hisBooks,'hisFollowers':hisFollowers,'books_num':books_num,'authors_num':authors_num})
 
 
 def getAuthors(request):
     authors = Author.objects.all()
     user = User.objects.get(id=2);
 
-    return render(request, 'authors.html', {'authors': authors, "user": user})
+    return render(request, 'authors.html', {'authors': authors, "user": user,'books_num':books_num,'authors_num':authors_num})
 
 
 def followAuthor(request, author_id):
@@ -95,7 +99,7 @@ def followAuthor(request, author_id):
     author.followers.add(user)
     author.save()
     print(author.followers.all())
-    return render(request, 'authors.html', {'authors': user.author_set.all(), "user": user})
+    return render(request, 'authors.html', {'authors': user.author_set.all(), "user": user,'books_num':books_num,'authors_num':authors_num})
 
 
 def unFollowAuthor(request, author_id):
@@ -103,7 +107,7 @@ def unFollowAuthor(request, author_id):
     author = Author.objects.get(id=author_id)
     author.followers.remove(user)
     author.save()
-    return render(request, 'authors.html', {'authors': user.author_set.all(), "user": user})
+    return render(request, 'authors.html', {'authors': user.author_set.all(), "user": user,'books_num':books_num,'authors_num':authors_num})
 
 
 def wantToRead(request, book_id, state):
@@ -126,6 +130,29 @@ def wantToRead(request, book_id, state):
 
 
     return JsonResponse({'statue': STATUS[int(state)]})
+
+def bookNotify(request, num):
+    books=Book.objects.all()
+    list=len(books)
+    print(list)
+    if list>int(num):
+        return JsonResponse({'books': list})
+        print(list)
+    else:
+        return JsonResponse({'books': num})
+
+def authorNotify(request, num):
+    authors=Author.objects.all()
+    list=len(authors)
+    print(list)
+    if list>int(num):
+        return JsonResponse({'authors': list})
+        print(list)
+    else:
+        return JsonResponse({'authors': num})
+
+
+
 
 def rate(request , book_id ,rate):
     book = Book.objects.get(id=book_id)
