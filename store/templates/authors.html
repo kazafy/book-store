@@ -1,8 +1,17 @@
 {% extends "base.html" %}
 {% block title %}BookStore{% endblock %}
 {% block body %}
+<div class="ui grid">
+    <div class="row">
+        <div class="one wide column"></div>
+        <div class="fourteen wide column">
+            <div class="ui segments">
 
-   <div class="ui link cards">
+                <div class="ui segment">
+                    <h3>Top Authors</h3>
+                    <div class="ui segment">
+                        <div class="row">
+                            <div class="ui grid">
     {% for a in authors %}
 
 
@@ -32,16 +41,24 @@
               <span class="right floated">
                 Joined in 2013
               </span>
-              <span>
+                                            <span>
                 <i class="user icon"></i>
                 75 Friends
               </span>
-            </div>
-          </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% empty %}
+                                You did'nt follow any author yet
+                                {% endfor %}
+                            </div>
+                        </div>
 
-    {% empty %}
-         No authors in the List
-    {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 
-{% endblock %}
+        {% endblock %}

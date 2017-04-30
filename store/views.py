@@ -35,7 +35,7 @@ def exit(request):
 
 def getBook(request, book_id):
     book = Book.objects.get(id=book_id)
-    user = User.objects.get(id=2);
+    user = User.objects.get(id=request.session['user_id']);
 
     print(book.bookstate_set.filter(user=user).first().statues)
     return render(request, 'book.html', {'book': book})
@@ -65,7 +65,10 @@ def getBooks(request):
 
 def getAuthor(request, author_id):
     author = Author.objects.get(id=author_id)
-    return render(request, 'author.html', {'author': author})
+    hisBooks=Book.objects.filter(author=author)
+    hisFollowers=len(author.followers.all())
+    print(hisFollowers)
+    return render(request, 'author.html', {'author': author,'hisBooks': hisBooks,'hisFollowers':hisFollowers})
 
 
 def getAuthors(request):
